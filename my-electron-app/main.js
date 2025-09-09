@@ -6,7 +6,7 @@ let win
 app.whenReady().then(() => {
     win = new BrowserWindow({
         width: 220,
-        height: 200,
+        height: 220,
         alwaysOnTop: true,                 // 常に前面
         frame: true,                      // 枠なし（PiP風）
         transparent: false,                 // 背景透過
@@ -17,11 +17,5 @@ app.whenReady().then(() => {
     // 🔑 macOS: すべてのデスクトップ + フルスクリーンアプリに表示
     win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     win.setAlwaysOnTop(true, 'screen-saver'); // より強制的に最前面
-    const indexPath = path.join(
-      process.resourcesPath,
-      'my-electron-app-react',
-      'dist',
-      'index.html'
-    );
-    win.loadFile(indexPath);
+    win.loadFile("./index.html");
 })
