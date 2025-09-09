@@ -1,0 +1,32 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "My Timer App",
+  "author": "Your Name",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"   
+  },
+  "devDependencies": {
+    "electron": "^37.3.1",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.example.myelectronapp",  
+    "productName": "MyElectronApp-2",        
+    "mac": {
+      "target": "dmg"                      
+    },
+    "win": {
+      "target": "nsis"                    
+    }, 
+    "extraFiles": [
+      {
+        "from": "../my-electron-app-react/dist",
+        "to": "Resources/my-electron-app-react/dist"
+      }
+    ]    
+  }
+}

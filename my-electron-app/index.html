@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Stopwatch</title>
+    <!-- CSS を読み込み -->
+    <link rel="stylesheet" href="index.css" />
+    <!-- React & ReactDOM を CDN から読み込み -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- JSX をブラウザで変換する Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function formatTime(seconds) {
+        const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
+        const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+        const secs = String(seconds % 60).padStart(2, "0");
+        return `${hrs}:${mins}:${secs}`;
+      }
+
+      function Stopwatch() {
+  const [time, setTime] = useState(0); // 秒数
+  const [running, setRunning] = useState(false);
+  const [inputText, setInputText] = useState("");
+
+        useEffect(() => {
+          let timerId;
+          if (running) {
+            timerId = setInterval(() => {
+              setTime((t) => t + 1);
+            }, 1000);
+          }
+          return () => clearInterval(timerId);
+        }, [running]);
+
+        const reset = () => {
+          setRunning(false);
+          setTime(0);
+        };
+
+        return (
+          <div style={{ textAlign: "center", fontFamily: "monospace" }}>
+            <h2 style={{ fontSize: "2.5em", marginBottom: "0.3em" }}>{formatTime(time)}</h2>
+            <div style={{ marginTop: "0.2em" }}>
+              <input
+                type="text"
+                value={inputText}
+                onChange={e => setInputText(e.target.value)}
+                placeholder="テキストを入力..."
+                style={{ fontSize: "1.2em", padding: "0.3em", width: "90%", boxSizing: "border-box" }}
+              />
+            </div>
+            <div className="button-group" style={{ marginTop: "0.7em" }}>
+              <button className="timer-button" onClick={() => setRunning(true)} disabled={running}>
+                ▶
+              </button>
+              <button className="timer-button" onClick={() => setRunning(false)} disabled={!running}>
+                ⏸
+              </button>
+              <button className="timer-button" onClick={reset}>
+                ⟳
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Stopwatch />);
+    </script>
+  </body>
+</html>

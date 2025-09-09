@@ -1,0 +1,18 @@
+/* index.css */
+.timer-button {
+  width: 55px;        /* 幅を固定 */
+  height: 55px;       /* 高さを固定 */
+  font-size: 1.5em;   /* 中の文字の大きさ */
+  margin: 5px;        /* ボタン間の余白 */
+  border-radius: 50%; /* 丸くする */
+  display: flex;      /* 中央寄せのためにflexboxを利用 */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;       /* 横並び */
+  gap: 5px;           /* ボタン同士の間隔 */
+}
+
